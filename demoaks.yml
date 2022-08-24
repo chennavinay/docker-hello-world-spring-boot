@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demojavaapp
+  namespace: devnamespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demojavaapp
+  template:
+    metadata:
+      labels:
+        app: demojavaapp
+    spec:
+      containers:
+      - name: demojavaapp
+        image: adodevopsreg.azurecr.io/chennavinaydockerhelloworldspringboot:78
+        
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - containerPort: 80
+          name: java
+      imagePullSecrets:
+        - name: acr-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demojavaapp
+  namespace: devnamespace
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: demojavaapp
