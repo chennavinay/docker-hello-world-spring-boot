@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: demojavaapp
-        image: adodevopsreg.azurecr.io/chennavinaydockerhelloworldspringboot:78
+        image: adodevopsreg.azurecr.io/chennavinaydockerhelloworldspringboot:77
         
         resources:
           requests:
